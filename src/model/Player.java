@@ -14,6 +14,8 @@ import javax.persistence.Table;
 public class Player {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column
+	private int playerId;
 	@Column(name="firstName")
 	private String firstName;
 	@Column(name="lastName")
@@ -40,7 +42,10 @@ public class Player {
 		this.team = team;
 	}
 
-	
+	public int getPlayerId() {
+		return playerId;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -68,8 +73,8 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return "Player [firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber
-				+ ", screenName=" + screenName + "]";
+		return "Player [playerId=" + playerId + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
+				+ phoneNumber + ", screenName=" + screenName + ", team=" + team + "]";
 	}
 	
 	
