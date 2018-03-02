@@ -34,7 +34,7 @@ public class TeamHelper {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		TypedQuery<Team> typedQuery = em.createQuery("select t from Team t where t.teamName = :selectedTeamName", Team.class);
+		TypedQuery<Team> typedQuery = em.createQuery("select t from Team t where t.teamName = :selectedteamName", Team.class);
 		typedQuery.setParameter("selectedTeamName", name);
 		typedQuery.setMaxResults(1);
 		Team result = typedQuery.getSingleResult();
@@ -45,7 +45,7 @@ public class TeamHelper {
 	public List<Team> viewAllTeamsWithPlayers() {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
-		TypedQuery<Team> allResults = em.createQuery("select t.teamName, p.firstName, p.lastName from Team t join Player p on t.teamId = p.teamId", Team.class);
+		TypedQuery<Team> allResults = em.createQuery("select t from Team t", Team.class);
 		List<Team> allTeams = allResults.getResultList();
 		em.close();
 		return allTeams;
