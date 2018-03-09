@@ -21,10 +21,16 @@ public class Team {
 	private String teamType;
 	@Column(name="preferredNight")
 	private String preferredNight;
+	
 
 	public Team() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Team(String name) {
+		super();
+		this.setTeamName(name);
 	}
 
 	public Team(int teamId, String teamType, String preferredNight) {

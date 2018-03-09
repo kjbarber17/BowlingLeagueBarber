@@ -27,13 +27,13 @@ public class viewAllTeamsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		TeamHelper dao = new TeamHelper();
-		request.setAttribute("allTeam", dao.viewAllTeamsWithPlayers());
-		if(dao.viewAllTeamsWithPlayers().isEmpty()) {
-			request.setAttribute("allTeams", " ");
+		TeamHelper th = new TeamHelper();
+		request.setAttribute("allTeams", th.viewAllTeams());
+		if(th.viewAllTeams().isEmpty()) {
+			
 		}
 		
-		getServletContext().getRequestDispatcher("/viewAllTeams.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/Team-list.jsp").forward(request, response);
 	}
 
 	/**

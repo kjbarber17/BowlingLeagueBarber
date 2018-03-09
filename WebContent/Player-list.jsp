@@ -6,23 +6,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>List of Players</title>
 </head>
 <body>
-<form method = "post" action = "viewAllPlayersServlet">
-<c:forEach items = "${requestScope.allTeams}" var="currentteam">
+<h1> List of Players</h1>
+<form method = "post" action = "editPlayerServlet">
+<table>
+<c:forEach items = "${requestScope.allPlayers}" var="currentPlayer">
 <tr>
-	<td><input type="radio" name="id" value="${currentplayer.id}"></td>
-	<td>${currentplayer.firstName}</td>
-	<td>${currentplayer.lastName}</td>
-	<td>${currentplayer.phoneNumber}</td>
-	<td>${currentplayer.screenName}</td>
+	<td><input type="radio" name="id" value="${currentPlayer.playerId}">${currentPlayer.playerId}</td>
+	<td>${currentPlayer.firstName}</td>
+	<td>${currentPlayer.lastName}</td>
+	<td>${currentPlayer.phoneNumber}</td>
+	<td>${currentPlayer.screenName}</td>
+	<td>${currentPlayer.team.getTeamName()}
 	</tr>
 	</c:forEach>
 	</table>
-	<input type = "submit"value = "Edit Selected Player" name="doThisToPlayer">
+	<br />
 	<input type = "submit"value = "Delete Selected Player" name="doThisToPlayer">
+	<br />
 	<input type = "submit"value = "Add New Player" name="doThisToPlayer">
 	</form>
+	<a href = "index.html"> Back to Menu</a><br/>
 </body>
 </html>

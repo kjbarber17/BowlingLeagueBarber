@@ -7,7 +7,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+
 import model.Player;
+import model.Team;
 
 
 public class PlayerHelper {
@@ -20,17 +22,19 @@ public class PlayerHelper {
 		em.getTransaction().commit();
 		em.close();
 	}
-	
-	public void deletePlayer(Player toDelete) {
+	public void deleteAllPlayersOnTeam(Team team) {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		Player find = em.find(Player.class, toDelete.getPlayerId());
-		em.remove(find);
+		TypedQuery<Player> deletePlayers = em.createQuery("delete from Player p where p.team = :selectedTeam", Player.class);
+		deletePlayers.setParameter("selectedTeam",team);
+		int deleteCount = deletePlayers.executeUpdate();
+		if (deleteCount > 0 ) {
+			System.out.println("players removed");
+		}
 		em.getTransaction().commit();
 		em.close();
 	}
-	
 	public List<Player> viewAllPlayers() {
 		// TODO Auto-generated method stub
 		EntityManager em = emfactory.createEntityManager();
@@ -39,6 +43,28 @@ public class PlayerHelper {
 		em.close();
 		return allPlayers;
 	}
-	
+	public Player searchForPlayerById(int idToEdit) {
+		// TODO Auto-generated method stub
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		Player foundPlayer = em.find(Player.class, idToEdit);
+		em.close();
+		return foundPlayer;
+	}
+	public void deletePlayer(Player player) {
+		// TODO Auto-generated method stub
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		TypedQuery<Player> deletePlayer = em.createQuery("select p from Player p where p.playerId = :selectedId", Player.class);
+		deletePlayer.setParameter("selectedId", player.getPlayerId());
+		deletePlayer.setMaxResults(1);
+		Player toDelete = deletePlayer.getSingleResult();
+		em.remove(toDelete);
+		em.getTransaction().commit();
+		em.close();
+	}
+
 }
+
+
 

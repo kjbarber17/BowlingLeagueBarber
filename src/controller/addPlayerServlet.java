@@ -30,19 +30,29 @@ public class addPlayerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		TeamHelper th = new TeamHelper();
-		PlayerHelper dao = new PlayerHelper();
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String phoneNumber = request.getParameter("phoneNumber");
 		String screenName = request.getParameter("screenName");
-		String team = request.getParameter("team");
-		Team t = th.searchForTeamByName(team);
+		String teamName = request.getParameter("teamName");
+		Team team;
+				
+		TeamHelper t = new TeamHelper();
+		PlayerHelper ph = new PlayerHelper();
 		
-		Player p = new Player (firstName, lastName, phoneNumber, screenName, t); 
-		dao.insertPlayer(p);
+		if (t.searchForTeamByName(teamName) == null){
+			team = new Team(teamName);
+			t.insertTeam(team);
+		}else {
+			team = t.searchForTeamByName(teamName);
+				
+		}
 		
-		getServletContext().getRequestDispatcher("/addPlayer.html").forward(request, response);
+		
+		Player p = new Player (firstName, lastName, phoneNumber, screenName, team); 
+		ph.insertPlayer(p);
+		
+		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
 	}
 
 }

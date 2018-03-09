@@ -35,11 +35,11 @@ public class Player {
 	
 	public Player(String firstName, String lastName, String phoneNumber, String screenName, Team team) {
 		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phoneNumber = phoneNumber;
-		this.screenName = screenName;
-		this.team = team;
+		this.setFirstName (firstName);
+		this.setLastName(lastName);
+		this.setPhoneNumber (phoneNumber);
+		this.setScreenName(screenName);
+		this.setTeam(team);
 	}
 
 	public int getPlayerId() {
@@ -69,6 +69,14 @@ public class Player {
 	}
 	public void setScreenName(String screenName) {
 		this.screenName = screenName;
+	}
+
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 
 	@Override
